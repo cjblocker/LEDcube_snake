@@ -60,7 +60,7 @@ TARGET = led_cube
 
 
 # List C source files here. (C dependencies are automatically generated.)
-SRC = $(TARGET).c view.c
+SRC = $(TARGET).c view.c controller.c
 
 
 # List Assembler source files here.

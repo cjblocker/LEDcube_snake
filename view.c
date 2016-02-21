@@ -65,8 +65,11 @@ void refreshLEDs(void){
 	curr_plane = (curr_plane+1) % (MAX_Z*2);
 	if (curr_plane % 2 == 0)
 	{
-		PORTB = cube[curr_plane/2].port1;
+		// oddly if you do these in the opposite order
+		// then the x,y position of the previous plane
+		// has a small amount of light
 		PORTC = cube[curr_plane/2].plane_mask;
+		PORTB = cube[curr_plane/2].port1;
 	}
 	else{
 		PORTB = 0;

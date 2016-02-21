@@ -1,6 +1,7 @@
 
 #include <avr/io.h>
 #include <view.h>
+#include <controller.h>
 
 //Define functions
 //======================
@@ -52,7 +53,9 @@ int main (void)
       // clearAllVoxels();
       // loadModel(model);
       // delay_ms(2000);
-      sphericalWave();
+      // sphericalWave();
+      roam();
+      delay_ms(200);
     }
    
     return(0);
@@ -61,6 +64,40 @@ int main (void)
 void ioinit (void)
 {
     init_view();
+    init_controller();
+}
+
+void roam(void){
+  static int x = 0;
+  static int y = 0;
+  static int z = 0;
+
+  if (down_pressed() && y < MAX_Y - 1)
+  {
+    y = y + 1;
+  }
+  else if (up_pressed() && y > 0)
+  {
+    y = y - 1;
+  }
+  else if (right_pressed() && x < MAX_X - 1)
+  {
+    x = x + 1;
+  }
+  else if (left_pressed() && x > 0)
+  {
+    x = x - 1;
+  }
+  else if (rise_pressed() && z < MAX_Z - 1)
+  {
+    z = z + 1;
+  }
+  else if (fall_pressed() && z > 0)
+  {
+    z = z - 1;
+  }
+  clearAllVoxels();
+  setVoxel(z, y, x, 1);
 }
 
 void sphericalWave(void){
